@@ -1,6 +1,0 @@
-guce:
-  mode: sim
-
-spring:
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-sim:9092}

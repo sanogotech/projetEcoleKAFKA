@@ -45,6 +45,10 @@ curl -s -X POST http://localhost:8080/api/v1/declarations ^
   -d "{\"correlationId\":\"corr-1\",\"declarantId\":\"TR-1\",\"customsOfficeCode\":\"CIAB1\",\"referenceNumber\":\"REF-1\",\"payloadJson\":\"{\\\"lines\":[]}\"}"
 ```
 
+## Fichiers de configuration
+
+Les propriétés Spring Boot sont dans `src/main/resources/` : `application.properties`, `application-dev.properties`, `application-prod.properties`, `application-sim.properties`.
+
 ## Configuration utile
 
 | Variable / propriété | Rôle |
