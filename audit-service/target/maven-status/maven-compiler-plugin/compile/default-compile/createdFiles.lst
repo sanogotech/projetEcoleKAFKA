@@ -1,0 +1,7 @@
+com\guce\audit\domain\AuditRecord.class
+com\guce\audit\api\dto\AuditRecordRequest.class
+com\guce\audit\AuditServiceApplication.class
+com\guce\audit\domain\AuditRecordRepository.class
+com\guce\audit\api\dto\AuditRecordResponse.class
+com\guce\audit\api\AuditController.class
+com\guce\audit\config\OpenApiConfig.class

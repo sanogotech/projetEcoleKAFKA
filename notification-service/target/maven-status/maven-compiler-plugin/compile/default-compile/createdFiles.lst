@@ -1,0 +1,14 @@
+com\guce\notification\messaging\KafkaTopicPublisher.class
+com\guce\notification\domain\NotificationDispatch.class
+com\guce\notification\messaging\KafkaMapProducerConfig.class
+com\guce\notification\messaging\TopicPublisher.class
+com\guce\notification\domain\NotificationDispatchRepository.class
+com\guce\notification\api\dto\NotificationDispatchResponse.class
+com\guce\notification\api\NotificationController.class
+com\guce\notification\NotificationServiceApplication.class
+com\guce\notification\domain\NotificationChannel.class
+com\guce\notification\config\GuceProperties.class
+com\guce\notification\config\OpenApiConfig.class
+com\guce\notification\config\GuceProperties$Kafka.class
+com\guce\notification\messaging\SimulationTopicPublisher.class
+com\guce\notification\api\dto\NotificationDispatchRequest.class

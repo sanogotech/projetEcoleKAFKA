@@ -1,0 +1,6 @@
+com\guce\portal\config\PortalProperties.class
+com\guce\portal\config\RestClientConfig.class
+com\guce\portal\web\DashboardController$1.class
+com\guce\portal\web\DashboardController.class
+com\guce\portal\GucePortalApplication.class
+com\guce\portal\web\DashboardController$2.class

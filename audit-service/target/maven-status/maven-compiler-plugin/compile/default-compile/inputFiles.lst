@@ -1,0 +1,7 @@
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\api\AuditController.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\api\dto\AuditRecordRequest.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\api\dto\AuditRecordResponse.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\AuditServiceApplication.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\config\OpenApiConfig.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\domain\AuditRecord.java
+D:\Perso\CodeProjetEcole\audit-service\src\main\java\com\guce\audit\domain\AuditRecordRepository.java

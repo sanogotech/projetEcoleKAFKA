@@ -1,0 +1,14 @@
+com\guce\manifest\config\GuceProperties.class
+com\guce\manifest\api\dto\ManifestRequest.class
+com\guce\manifest\messaging\KafkaTopicPublisher.class
+com\guce\manifest\api\ManifestController.class
+com\guce\manifest\messaging\KafkaMapProducerConfig.class
+com\guce\manifest\messaging\SimulationTopicPublisher.class
+com\guce\manifest\domain\ManifestRepository.class
+com\guce\manifest\config\GuceProperties$Kafka.class
+com\guce\manifest\domain\ManifestEntity.class
+com\guce\manifest\ManifestServiceApplication.class
+com\guce\manifest\api\dto\ManifestResponse.class
+com\guce\manifest\messaging\TopicPublisher.class
+com\guce\manifest\config\OpenApiConfig.class
+com\guce\manifest\config\EnableGuceProperties.class

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.guce</groupId>
+    <artifactId>guce-ci</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>guce-ci</name>
+    <description>GUCE CI 2.0 — plateforme multi-services (REST + Kafka)</description>
+
+    <modules>
+        <module>declaration-service</module>
+        <module>manifest-service</module>
+        <module>authorization-service</module>
+        <module>payment-service</module>
+        <module>inspection-service</module>
+        <module>pcs-adapter</module>
+        <module>reference-service</module>
+        <module>operator-service</module>
+        <module>notification-service</module>
+        <module>audit-service</module>
+        <module>guce-portal</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <springdoc.version>2.8.5</springdoc.version>
+    </properties>
+</project>

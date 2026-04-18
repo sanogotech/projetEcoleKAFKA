@@ -1,0 +1,9 @@
+com\guce\authorization\domain\AuthorizationStatus.class
+com\guce\authorization\api\dto\AuthorizationRequest.class
+com\guce\authorization\api\dto\StatusUpdateRequest.class
+com\guce\authorization\AuthorizationServiceApplication.class
+com\guce\authorization\config\OpenApiConfig.class
+com\guce\authorization\api\dto\AuthorizationResponse.class
+com\guce\authorization\domain\ApiAuthorizationRepository.class
+com\guce\authorization\api\AuthorizationController.class
+com\guce\authorization\domain\ApiAuthorization.class

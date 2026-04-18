@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: guce-portal
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+
+server:
+  port: 8090
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# URLs des microservices (dev local)
+guce:
+  services:
+    declaration: http://localhost:8080
+    manifest: http://localhost:8081
+    authorization: http://localhost:8082
+    payment: http://localhost:8083
+    inspection: http://localhost:8084
+    pcs: http://localhost:8085
+    reference: http://localhost:8086
+    operator: http://localhost:8087
+    notification: http://localhost:8088
+    audit: http://localhost:8089

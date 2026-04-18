@@ -1,0 +1,7 @@
+guce:
+  mode: dev
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration

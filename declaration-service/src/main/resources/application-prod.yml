@@ -1,0 +1,14 @@
+# Production : Kafka réel, base PostgreSQL (surcharger via variables d'environnement)
+guce:
+  mode: prod
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/guce_declaration}
+    username: ${SPRING_DATASOURCE_USERNAME:guce}
+    password: ${SPRING_DATASOURCE_PASSWORD:guce}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

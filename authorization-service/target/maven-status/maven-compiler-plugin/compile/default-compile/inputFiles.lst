@@ -1,0 +1,9 @@
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\api\AuthorizationController.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\api\dto\AuthorizationRequest.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\api\dto\AuthorizationResponse.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\api\dto\StatusUpdateRequest.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\AuthorizationServiceApplication.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\config\OpenApiConfig.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\domain\ApiAuthorization.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\domain\ApiAuthorizationRepository.java
+D:\Perso\CodeProjetEcole\authorization-service\src\main\java\com\guce\authorization\domain\AuthorizationStatus.java

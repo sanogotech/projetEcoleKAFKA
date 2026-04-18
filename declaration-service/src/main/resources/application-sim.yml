@@ -1,0 +1,12 @@
+# Simulation : Kafka réel (brokers dédiés), données de test
+guce:
+  mode: sim
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-sim:9092}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:guce_sim;DB_CLOSE_DELAY=-1;MODE=PostgreSQL}
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:

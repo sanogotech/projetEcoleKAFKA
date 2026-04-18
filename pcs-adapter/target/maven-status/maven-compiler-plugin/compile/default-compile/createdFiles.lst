@@ -1,0 +1,9 @@
+com\guce\pcs\api\dto\ContainerMovementResponse.class
+com\guce\pcs\domain\ContainerMovementRepository.class
+com\guce\pcs\api\dto\ContainerMovementRequest.class
+com\guce\pcs\domain\ContainerMovement.class
+com\guce\pcs\config\OpenApiConfig.class
+com\guce\pcs\api\PcsController.class
+com\guce\pcs\domain\MovementType.class
+com\guce\pcs\PcsAdapterApplication.class
+com\guce\pcs\api\dto\MainleveeNotificationRequest.class

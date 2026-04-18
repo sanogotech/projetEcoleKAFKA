@@ -1,0 +1,7 @@
+com\guce\reference\service\ReferenceCatalog.class
+com\guce\reference\ReferenceServiceApplication.class
+com\guce\reference\api\dto\CustomsOfficeDto.class
+com\guce\reference\api\dto\TariffDto.class
+com\guce\reference\api\ReferenceController.class
+com\guce\reference\api\dto\ShCodeDto.class
+com\guce\reference\config\OpenApiConfig.class

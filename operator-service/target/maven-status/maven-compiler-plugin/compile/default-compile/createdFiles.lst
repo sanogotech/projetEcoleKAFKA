@@ -1,0 +1,7 @@
+com\guce\operator\api\dto\OperatorRequest.class
+com\guce\operator\OperatorServiceApplication.class
+com\guce\operator\api\OperatorController.class
+com\guce\operator\domain\OperatorRepository.class
+com\guce\operator\config\OpenApiConfig.class
+com\guce\operator\api\dto\OperatorResponse.class
+com\guce\operator\domain\OperatorAccount.class
