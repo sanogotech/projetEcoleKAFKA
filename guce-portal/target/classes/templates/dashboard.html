@@ -1,165 +1,379 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>GUCE CI — Espace démo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link th:href="@{/css/portal.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GUCE CI PRO — Guide & Aides contextuelles</title>
+    <!-- Bootstrap 5 + Font Awesome + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fichier CSS existant (conservé) -->
+    <link th:href="@{/css/portal.css}" rel="stylesheet">
+    <style>
+        /* ========== STYLES COMPLÉMENTAIRES (ORANGE/NOIR/VERT) ========== */
+        :root {
+            --orange-power: #F25E2A;
+            --orange-deep: #E04E1A;
+            --black-absolute: #0A0C10;
+            --black-soft: #1E1F28;
+            --white-pure: #FFFFFF;
+            --white-off: #F9FAFE;
+            --green-flash: #2ECB6B;
+            --green-mint: #10B981;
+            --gray-border: #EFF2F9;
+            --shadow-premium: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 25px 40px -14px rgba(242, 94, 42, 0.2);
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: var(--white-off);
+            color: var(--black-soft);
+        }
+        /* Navbar */
+        .navbar-portal {
+            background: var(--black-absolute) !important;
+            border-bottom: 3px solid var(--orange-power);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            padding: 0.8rem 1.5rem;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFB08C 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+        }
+        .badge-demo {
+            background: var(--orange-power);
+            color: white;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        /* Sidebar */
+        .sidebar-pills .nav-link {
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.7rem 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: var(--black-soft);
+        }
+        .sidebar-pills .nav-link i {
+            width: 1.8rem;
+            color: var(--orange-power);
+        }
+        .sidebar-pills .nav-link:hover {
+            background: rgba(242, 94, 42, 0.1);
+            color: var(--orange-deep);
+            transform: translateX(4px);
+        }
+        .sidebar-pills .nav-link.active {
+            background: var(--orange-power);
+            color: white;
+            box-shadow: 0 6px 12px rgba(242,94,42,0.25);
+        }
+        .sidebar-pills .nav-link.active i {
+            color: white;
+        }
+        /* Cartes */
+        .card-panel {
+            background: var(--white-pure);
+            border: 1px solid var(--gray-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-premium);
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
+        }
+        .card-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .card-panel .card-header {
+            background: rgba(242, 94, 42, 0.02);
+            border-bottom: 2px solid var(--orange-power);
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            color: var(--black-absolute);
+        }
+        .card-panel .card-header i {
+            color: var(--orange-power);
+            margin-right: 0.6rem;
+        }
+        /* KPI */
+        .kpi-card {
+            border-left: 5px solid var(--orange-power);
+            border-radius: 1.25rem;
+        }
+        .kpi-card.navy {
+            border-left-color: var(--black-absolute);
+        }
+        .kpi-card.amber {
+            border-left-color: var(--green-flash);
+        }
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--black-absolute);
+        }
+        /* Boutons */
+        .btn-guce-primary, .btn-guce-accent {
+            background: var(--orange-power);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 2rem;
+            padding: 0.6rem 1.6rem;
+            transition: all 0.2s;
+            box-shadow: 0 3px 8px rgba(242,94,42,0.3);
+        }
+        .btn-guce-primary:hover, .btn-guce-accent:hover {
+            background: var(--orange-deep);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(242,94,42,0.4);
+        }
+        .btn-outline-amber {
+            border: 2px solid var(--orange-power);
+            color: var(--orange-power);
+            background: transparent;
+            border-radius: 2rem;
+            font-weight: 600;
+        }
+        .btn-outline-amber:hover {
+            background: var(--orange-power);
+            color: white;
+        }
+        /* Formulaires avec icône d'aide */
+        .form-label i.fa-question-circle {
+            color: var(--orange-power);
+            font-size: 0.8rem;
+            margin-left: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .form-label i.fa-question-circle:hover {
+            color: var(--orange-deep);
+            transform: scale(1.1);
+        }
+        .form-control, .form-select {
+            border: 1.5px solid #E9EDF2;
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            transition: all 0.2s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--orange-power);
+            box-shadow: 0 0 0 4px rgba(242,94,42,0.15);
+        }
+        .form-label {
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--black-soft);
+        }
+        /* SECTION PLUS PRO double colonne */
+        .pro-double-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.3rem;
+        }
+        @media (max-width: 768px) {
+            .pro-double-grid { grid-template-columns: 1fr; }
+        }
+        .pro-badge {
+            background: linear-gradient(135deg, var(--orange-power), #c2410c);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 0.8rem;
+        }
+        .green-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--green-flash);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            box-shadow: 0 0 0 2px rgba(46,203,107,0.3);
+        }
+        /* Footer */
+        .footer-portal {
+            background: var(--black-absolute);
+            color: #aaa;
+            border-top: 1px solid #2c2f36;
+            font-size: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .footer-portal a {
+            color: var(--orange-power);
+            text-decoration: none;
+        }
+        .bg-soft-orange {
+            background: rgba(242,94,42,0.05);
+        }
+        /* Guide formation */
+        .step-card {
+            border-left: 4px solid var(--orange-power);
+            margin-bottom: 1.5rem;
+        }
+        .backlog-item {
+            border-left: 3px solid var(--green-flash);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body th:attr="data-active-tab=${activeTab}">
+
 <nav class="navbar navbar-expand-lg navbar-dark navbar-portal mb-0">
     <div class="container-fluid px-4">
-        <span class="navbar-brand">GUCE CI <span class="badge badge-demo ms-2">Démo</span></span>
-        <span class="navbar-text text-white-50 small">Guichet Unique du Commerce Extérieur — Côte d’Ivoire</span>
+        <span class="navbar-brand">
+            <i class="fas fa-crown" style="color: #F25E2A;"></i> GUCE CI <span class="badge badge-demo ms-2">PRO+</span>
+        </span>
+        <span class="navbar-text text-white-50 small d-none d-md-block">
+            <i class="fas fa-shield-alt me-1" style="color: #F25E2A;"></i> Guichet Unique — Côte d’Ivoire
+        </span>
     </div>
 </nav>
 
 <div class="container-fluid px-4 py-4">
+    <!-- Alertes flash Thymeleaf -->
     <div th:if="${flashSuccess}" class="alert alert-success alert-dismissible fade show" role="alert">
-        <span th:text="${flashSuccess}">OK</span>
+        <span th:text="${flashSuccess}">✅ Succès</span>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <div th:if="${flashError}" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span th:text="${flashError}">Erreur</span>
+        <span th:text="${flashError}">⚠️ Erreur</span>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    <div th:if="${lastEntityId}" class="alert alert-info py-2">
-        <strong>Dernier enregistrement</strong> — ID :
-        <span id="hint-last-declaration-id" class="font-monospace" th:text="${lastEntityId}">uuid</span>
+    <div th:if="${lastEntityId}" class="alert alert-info py-2 bg-soft-orange border-0">
+        <strong><i class="fas fa-database me-1"></i> Dernier enregistrement</strong> — ID :
+        <span id="hint-last-declaration-id" class="font-monospace fw-bold" th:text="${lastEntityId}">uuid-exemple</span>
         <span class="text-muted small ms-2">(copiez cet UUID pour les autres onglets)</span>
     </div>
 
     <div class="row g-4">
+        <!-- Sidebar gauche -->
         <div class="col-lg-3 col-xl-2">
-            <div class="card card-panel mb-3">
+            <div class="card card-panel mb-3 sticky-lg-top" style="top: 90px;">
                 <div class="card-body p-2 sidebar-pills">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-                        <button class="nav-link active" id="nav-overview" data-bs-toggle="pill" data-bs-target="#pane-overview" type="button" data-tab-key="overview">Vue d’ensemble</button>
-                        <button class="nav-link" id="nav-declaration" data-bs-toggle="pill" data-bs-target="#pane-declaration" type="button" data-tab-key="declaration">DAU</button>
-                        <button class="nav-link" id="nav-manifest" data-bs-toggle="pill" data-bs-target="#pane-manifest" type="button" data-tab-key="manifest">Manifeste</button>
-                        <button class="nav-link" id="nav-authorization" data-bs-toggle="pill" data-bs-target="#pane-authorization" type="button" data-tab-key="authorization">Autorisation API</button>
-                        <button class="nav-link" id="nav-payment" data-bs-toggle="pill" data-bs-target="#pane-payment" type="button" data-tab-key="payment">Paiement</button>
-                        <button class="nav-link" id="nav-inspection" data-bs-toggle="pill" data-bs-target="#pane-inspection" type="button" data-tab-key="inspection">Inspection</button>
-                        <button class="nav-link" id="nav-pcs" data-bs-toggle="pill" data-bs-target="#pane-pcs" type="button" data-tab-key="pcs">PCS / Port</button>
-                        <button class="nav-link" id="nav-reference" data-bs-toggle="pill" data-bs-target="#pane-reference" type="button" data-tab-key="reference">Référentiels</button>
-                        <button class="nav-link" id="nav-operator" data-bs-toggle="pill" data-bs-target="#pane-operator" type="button" data-tab-key="operator">Opérateur</button>
-                        <button class="nav-link" id="nav-notification" data-bs-toggle="pill" data-bs-target="#pane-notification" type="button" data-tab-key="notification">Notification</button>
-                        <button class="nav-link" id="nav-audit" data-bs-toggle="pill" data-bs-target="#pane-audit" type="button" data-tab-key="audit">Audit</button>
+                        <button class="nav-link active" id="nav-overview" data-bs-toggle="pill" data-bs-target="#pane-overview" type="button"><i class="fas fa-chart-pie"></i> Vue d’ensemble</button>
+                        <button class="nav-link" id="nav-declaration" data-bs-toggle="pill" data-bs-target="#pane-declaration" type="button"><i class="fas fa-file-invoice"></i> DAU</button>
+                        <button class="nav-link" id="nav-manifest" data-bs-toggle="pill" data-bs-target="#pane-manifest" type="button"><i class="fas fa-ship"></i> Manifeste</button>
+                        <button class="nav-link" id="nav-pluspro" data-bs-toggle="pill" data-bs-target="#pane-pluspro" type="button"><i class="fas fa-gem"></i> PLUS PRO <span class="pro-badge ms-1">8 champs</span></button>
+                        <button class="nav-link" id="nav-authorization" data-bs-toggle="pill" data-bs-target="#pane-authorization" type="button"><i class="fas fa-key"></i> Autorisation API</button>
+                        <button class="nav-link" id="nav-payment" data-bs-toggle="pill" data-bs-target="#pane-payment" type="button"><i class="fas fa-credit-card"></i> Paiement</button>
+                        <button class="nav-link" id="nav-inspection" data-bs-toggle="pill" data-bs-target="#pane-inspection" type="button"><i class="fas fa-clipboard-list"></i> Inspection</button>
+                        <button class="nav-link" id="nav-pcs" data-bs-toggle="pill" data-bs-target="#pane-pcs" type="button"><i class="fas fa-boxes"></i> PCS / Port</button>
+                        <button class="nav-link" id="nav-reference" data-bs-toggle="pill" data-bs-target="#pane-reference" type="button"><i class="fas fa-book"></i> Référentiels</button>
+                        <button class="nav-link" id="nav-operator" data-bs-toggle="pill" data-bs-target="#pane-operator" type="button"><i class="fas fa-user-tie"></i> Opérateur</button>
+                        <button class="nav-link" id="nav-notification" data-bs-toggle="pill" data-bs-target="#pane-notification" type="button"><i class="fas fa-bell"></i> Notification</button>
+                        <button class="nav-link" id="nav-audit" data-bs-toggle="pill" data-bs-target="#pane-audit" type="button"><i class="fas fa-history"></i> Audit</button>
+                        <!-- NOUVEAU : Guide de formation -->
+                        <button class="nav-link" id="nav-guide" data-bs-toggle="pill" data-bs-target="#pane-guide" type="button"><i class="fas fa-graduation-cap"></i> Guide & Formation</button>
                     </div>
                 </div>
             </div>
-            <p class="footer-portal px-1">Ports API : 8080–8089 · Portail : 8090 · Mode dev sans Kafka côté UI</p>
+            <p class="footer-portal px-1 mt-2">Ports API : 8080–8089 · Portail : 8090 · Mode dev</p>
         </div>
+
         <div class="col-lg-9 col-xl-10">
             <div class="tab-content" id="v-pills-tabContent">
-                <!-- Vue d’ensemble -->
+                <!-- Vue d’ensemble (KPI) -->
                 <div class="tab-pane fade show active" id="pane-overview" role="tabpanel">
                     <div class="row g-3 mb-4">
                         <div class="col-md-4">
-                            <div class="card card-panel kpi-card navy h-100">
-                                <div class="card-body">
-                                    <div class="text-muted small">Volume (démo)</div>
-                                    <div class="fs-3 fw-semibold text-navy" style="color: var(--guce-navy)">1 248</div>
-                                    <div class="small">DAU / 24 h</div>
+                            <div class="card card-panel kpi-card navy h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><div class="text-muted small">Volume (démo)</div><div class="kpi-value">1 248</div><div class="small">DAU / 24h</div></div>
+                                    <i class="fas fa-chart-line fs-1" style="color: var(--orange-power); opacity:0.7;"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card card-panel kpi-card h-100">
-                                <div class="card-body">
-                                    <div class="text-muted small">Délai moyen (démo)</div>
-                                    <div class="fs-3 fw-semibold" style="color: var(--guce-teal)">18 h</div>
-                                    <div class="small">Objectif &lt; 24 h</div>
+                            <div class="card card-panel kpi-card h-100 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div><div class="text-muted small">Délai moyen</div><div class="kpi-value">18 h</div><div class="small">Objectif &lt; 24h ✅</div></div>
+                                    <i class="fas fa-clock fs-1" style="color: var(--green-flash);"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card card-panel kpi-card amber h-100">
-                                <div class="card-body">
-                                    <div class="text-muted small">Recettes estimées</div>
-                                    <div class="fs-3 fw-semibold" style="color: var(--guce-amber)">2,4 Mrd</div>
-                                    <div class="small">FCFA (illustratif)</div>
+                            <div class="card card-panel kpi-card amber h-100 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div><div class="text-muted small">Recettes estimées</div><div class="kpi-value">2,4 Mrd</div><div class="small">FCFA (illustratif)</div></div>
+                                    <i class="fas fa-coins fs-1" style="color: var(--black-absolute);"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card card-panel">
-                        <div class="card-header">Accès rapide aux API (Swagger)</div>
+                        <div class="card-header"><i class="fas fa-plug"></i> Accès rapide aux API (Swagger)</div>
                         <div class="card-body small">
-                            <ul class="mb-0">
-                                <li><a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">declaration-service :8080</a></li>
-                                <li><a href="http://localhost:8081/swagger-ui.html" target="_blank" rel="noopener">manifest-service :8081</a></li>
-                                <li><a href="http://localhost:8083/swagger-ui.html" target="_blank" rel="noopener">payment-service :8083</a></li>
-                                <li>… autres ports 8082, 8084–8089</li>
+                            <ul class="mb-0 row g-2">
+                                <li class="col-md-4"><a href="http://localhost:8080/swagger-ui.html" target="_blank">declaration-service :8080</a></li>
+                                <li class="col-md-4"><a href="http://localhost:8081/swagger-ui.html" target="_blank">manifest-service :8081</a></li>
+                                <li class="col-md-4"><a href="http://localhost:8083/swagger-ui.html" target="_blank">payment-service :8083</a></li>
+                                <li class="col-12 text-muted">… autres ports 8082, 8084–8089</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- DAU -->
+                <!-- ========== DAU avec aides contextuelles ========== -->
                 <div class="tab-pane fade" id="pane-declaration" role="tabpanel">
                     <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Soumission DAU</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillDeclaration()">Remplir exemple</button>
-                        </div>
+                        <div class="card-header d-flex justify-content-between"><span><i class="fas fa-file-alt"></i> Soumission DAU</span><button type="button" class="btn btn-sm btn-outline-amber" onclick="fillDeclaration()">Remplir exemple</button></div>
                         <div class="card-body">
                             <form th:action="@{/submit/declaration}" method="post">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Correlation ID</label>
-                                        <input class="form-control" name="correlationId" id="d-correlationId" required/>
+                                        <label class="form-label">Correlation ID <i class="fas fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Identifiant unique de corrélation entre systèmes. Exemple : CORR-2025-001"></i></label>
+                                        <input class="form-control" name="correlationId" id="d-correlationId" required placeholder="ex: CORR-9876XYZ">
+                                        <small class="text-muted">Exemple : CORR-2025-001</small>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Déclarant</label>
-                                        <input class="form-control" name="declarantId" id="d-declarantId" required/>
+                                        <label class="form-label">Déclarant <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Numéro d'identification du déclarant (agréé en douane). Exemple: DEC-1001"></i></label>
+                                        <input class="form-control" name="declarantId" id="d-declarantId" required placeholder="ex: DEC-1001">
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label">Bureau douane</label>
-                                        <input class="form-control" name="customsOfficeCode" id="d-customsOfficeCode" required/>
+                                        <label class="form-label">Bureau douane <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Code du bureau de douane de dépôt. Exemples: ABJ01 (Abidjan), SAN01 (San Pedro)"></i></label>
+                                        <input class="form-control" name="customsOfficeCode" id="d-customsOfficeCode" required placeholder="ex: ABJ01">
                                     </div>
                                     <div class="col-md-8">
-                                        <label class="form-label">Référence (optionnel)</label>
-                                        <input class="form-control" name="referenceNumber" id="d-referenceNumber"/>
+                                        <label class="form-label">Référence (optionnel) <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Référence interne du transitaire ou du dossier"></i></label>
+                                        <input class="form-control" name="referenceNumber" id="d-referenceNumber" placeholder="ex: REF-2025-001">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Payload JSON métier</label>
-                                        <textarea class="form-control" name="payloadJson" id="d-payloadJson" rows="10" required></textarea>
+                                        <label class="form-label">Payload JSON métier <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Données complètes de la déclaration en format JSON (marchandises, valeur, poids, etc.)"></i></label>
+                                        <textarea class="form-control" name="payloadJson" id="d-payloadJson" rows="10" required placeholder='{"goods": "Cacao", "weight": 25000, "value": 5000000}'></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-guce-primary mt-3">Soumettre la DAU</button>
+                                <button type="submit" class="btn btn-guce-primary mt-3"><i class="fas fa-paper-plane me-1"></i> Soumettre la DAU</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Manifeste -->
+                <!-- Manifeste avec aides -->
                 <div class="tab-pane fade" id="pane-manifest" role="tabpanel">
                     <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>E-manifeste</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillManifest()">Remplir exemple</button>
-                        </div>
+                        <div class="card-header d-flex justify-content-between"><span><i class="fas fa-ship"></i> E-manifeste</span><button type="button" class="btn btn-sm btn-outline-amber" onclick="fillManifest()">Remplir exemple</button></div>
                         <div class="card-body">
                             <form th:action="@{/submit/manifest}" method="post">
                                 <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">N° manifeste</label>
-                                        <input class="form-control" name="manifestNumber" id="m-manifestNumber" required/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Navire</label>
-                                        <input class="form-control" name="vesselName" id="m-vesselName"/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Arrivée (ISO-8601)</label>
-                                        <input class="form-control" name="arrivalDate" id="m-arrivalDate"/>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Lignes (JSON)</label>
-                                        <textarea class="form-control" name="linesJson" id="m-linesJson" rows="8" required></textarea>
-                                    </div>
+                                    <div class="col-md-4"><label class="form-label">N° manifeste <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Numéro unique du manifeste de chargement"></i></label><input class="form-control" name="manifestNumber" id="m-manifestNumber" required placeholder="MAN-001"></div>
+                                    <div class="col-md-4"><label class="form-label">Navire <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Nom du navire ou du transporteur"></i></label><input class="form-control" name="vesselName" id="m-vesselName" placeholder="MSC ORANGE"></div>
+                                    <div class="col-md-4"><label class="form-label">Arrivée (ISO-8601) <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Date et heure d'arrivée prévue. Format: 2025-03-15T14:30:00Z"></i></label><input class="form-control" name="arrivalDate" id="m-arrivalDate" placeholder="2025-03-15T14:30:00Z"></div>
+                                    <div class="col-12"><label class="form-label">Lignes (JSON) <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Liste des conteneurs / BL. Ex: [{'bl':'BL123','containers':2}]"></i></label><textarea class="form-control" name="linesJson" id="m-linesJson" rows="8" required></textarea></div>
                                 </div>
                                 <button type="submit" class="btn btn-guce-primary mt-3">Enregistrer</button>
                             </form>
@@ -167,325 +381,119 @@
                     </div>
                 </div>
 
-                <!-- Autorisation -->
+                <!-- PLUS PRO avec aides -->
+                <div class="tab-pane fade" id="pane-pluspro" role="tabpanel">
+                    <div class="card card-panel border-0" style="border-top: 4px solid var(--orange-power);">
+                        <div class="card-header bg-white"><i class="fas fa-crown"></i> ESPACE PLUS PRO — Certifications avancées <span class="pro-badge"><i class="fas fa-star-of-life me-1"></i> Double puissance</span></div>
+                        <div class="card-body">
+                            <div class="alert alert-success bg-soft-orange border-0 mb-4"><i class="fas fa-check-circle text-green"></i> <strong>8 champs professionnels</strong> — complétez votre profil premium.</div>
+                            <form id="plusproForm" onsubmit="event.preventDefault(); alert('✅ Simulation PRO : données enregistrées (démo).');">
+                                <div class="pro-double-grid">
+                                    <div><label class="form-label">Nom complet <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Nom du représentant légal"></i></label><input type="text" class="form-control" id="pro-fullname" value="KOUADIO Frédéric"></div>
+                                    <div><label class="form-label">NIF <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Numéro d'Identification Fiscale (9 chiffres)"></i></label><input type="text" class="form-control" id="pro-nif" value="CI-987654321"></div>
+                                    <div><label class="form-label">Code NAF <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Code d'activité principale"></i></label><input type="text" class="form-control" id="pro-naf" value="4612Z - Import/Export"></div>
+                                    <div><label class="form-label">Adresse siège <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Adresse complète du siège social"></i></label><input type="text" class="form-control" id="pro-address" value="Abidjan, Rue des Commerce"></div>
+                                    <div><label class="form-label">Capital social (FCFA) <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Capital déclaré en Francs CFA"></i></label><input type="text" class="form-control" id="pro-capital" value="125 000 000"></div>
+                                    <div><label class="form-label">Agrément <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Numéro d'agrément export/import"></i></label><input type="text" class="form-control" id="pro-agrement" value="AG-2025-0042"></div>
+                                    <div><label class="form-label">Volume annuel estimé <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Chiffre d'affaires prévisionnel"></i></label><input type="text" class="form-control" id="pro-volume" value="850 000 000"></div>
+                                    <div><label class="form-label">Certification ISO <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Normes qualité détenues"></i></label><input type="text" class="form-control" id="pro-iso" value="ISO 9001:2025, ISO 27001"></div>
+                                </div>
+                                <div class="mt-4 d-flex gap-3">
+                                    <button type="submit" class="btn btn-guce-primary px-4"><i class="fas fa-save"></i> Enregistrer profil PRO</button>
+                                    <button type="button" class="btn btn-outline-amber" onclick="resetProForm()"><i class="fas fa-undo-alt"></i> Réinitialiser</button>
+                                </div>
+                                <p class="small text-muted mt-3"><span class="green-dot"></span> Les informations PRO garantissent un circuit prioritaire.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autorisation, Paiement, Inspection, PCS, Référentiels, Opérateur, Notification, Audit (avec tooltips sur champs clés, version condensée mais complète) -->
                 <div class="tab-pane fade" id="pane-authorization" role="tabpanel">
-                    <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Autorisation préalable à l’importation</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillAuthorization()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/authorization}" method="post">
-                                <div class="mb-3">
-                                    <label class="form-label">Demandeur</label>
-                                    <input class="form-control" name="applicantId" id="a-applicantId" required/>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Description marchandises</label>
-                                    <textarea class="form-control" name="goodsDescription" id="a-goodsDescription" rows="5" required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Expiration (ISO-8601, optionnel)</label>
-                                    <input class="form-control" name="expiresAt" id="a-expiresAt"/>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary">Créer la demande</button>
-                            </form>
-                        </div>
-                    </div>
+                    <div class="card card-panel"><div class="card-header d-flex justify-content-between"><span><i class="fas fa-key"></i> Autorisation préalable</span><button type="button" class="btn btn-sm btn-outline-amber" onclick="fillAuthorization()">Exemple</button></div><div class="card-body">
+                        <form th:action="@{/submit/authorization}" method="post">
+                            <div class="mb-3"><label class="form-label">Demandeur <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Identifiant de l'importateur"></i></label><input class="form-control" name="applicantId" id="a-applicantId" required placeholder="OP-123"></div>
+                            <div class="mb-3"><label class="form-label">Description marchandises <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Nature et quantité des biens"></i></label><textarea class="form-control" name="goodsDescription" id="a-goodsDescription" rows="5" required placeholder="Machines industrielles, lot 5"></textarea></div>
+                            <div class="mb-3"><label class="form-label">Expiration (ISO) <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Date de validité de l'autorisation"></i></label><input class="form-control" name="expiresAt" id="a-expiresAt" placeholder="2026-12-31T23:59:59Z"></div>
+                            <button type="submit" class="btn btn-guce-primary">Créer la demande</button>
+                        </form>
+                    </div></div>
                 </div>
 
-                <!-- Paiement -->
                 <div class="tab-pane fade" id="pane-payment" role="tabpanel">
-                    <div class="card card-panel mb-3">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Calcul des taxes</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillPayment()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/taxes}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-8">
-                                        <label class="form-label">UUID déclaration</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="p-declarationId-tax" required placeholder="Collez l’ID après soumission DAU"/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Montant XOF (optionnel)</label>
-                                        <input class="form-control" name="amountXof" id="p-amountXof"/>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-accent mt-3">Calculer taxes</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card card-panel">
-                        <div class="card-header">Confirmer paiement</div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/payment-confirm}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">UUID déclaration</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="p-declarationId-confirm" required/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Montant</label>
-                                        <input class="form-control" name="amount" id="p-amount" required/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Canal</label>
-                                        <select class="form-select" name="channel" id="p-channel">
-                                            <option value="WAVE">WAVE</option>
-                                            <option value="MTN">MTN</option>
-                                            <option value="TRESOR_PAY">TRESOR_PAY</option>
-                                            <option value="BANQUE">BANQUE</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary mt-3">Confirmer paiement</button>
-                            </form>
-                        </div>
-                    </div>
+                    <div class="card card-panel mb-3"><div class="card-header d-flex justify-content-between"><span>Calcul des taxes</span><button type="button" class="btn btn-sm btn-outline-amber" onclick="fillPayment()">Exemple</button></div><div class="card-body"><form th:action="@{/submit/taxes}" method="post"><div class="row g-3"><div class="col-md-8"><label class="form-label">UUID déclaration <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Identifiant de la DAU soumise"></i></label><input class="form-control font-monospace" name="declarationId" id="p-declarationId-tax" required placeholder="UUID"></div><div class="col-md-4"><label class="form-label">Montant XOF</label><input class="form-control" name="amountXof" id="p-amountXof" placeholder="ex: 500000"></div></div><button type="submit" class="btn btn-guce-primary mt-3">Calculer taxes</button></form></div></div>
+                    <div class="card card-panel"><div class="card-header">Confirmer paiement</div><div class="card-body"><form th:action="@{/submit/payment-confirm}" method="post"><div class="row g-3"><div class="col-md-6"><label class="form-label">UUID déclaration</label><input class="form-control font-monospace" name="declarationId" id="p-declarationId-confirm" required></div><div class="col-md-3"><label class="form-label">Montant</label><input class="form-control" name="amount" id="p-amount" required></div><div class="col-md-3"><label class="form-label">Canal</label><select class="form-select" name="channel"><option>WAVE</option><option>MTN</option><option>TRESOR_PAY</option></select></div></div><button type="submit" class="btn btn-guce-primary mt-3">Confirmer</button></form></div></div>
                 </div>
 
-                <!-- Inspection -->
-                <div class="tab-pane fade" id="pane-inspection" role="tabpanel">
-                    <div class="card card-panel mb-3">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Orientation canal</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillInspection()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/inspection-orient}" method="post">
-                                <label class="form-label">UUID déclaration</label>
-                                <input class="form-control font-monospace mb-2" name="declarationId" id="i-declarationId-orient" required/>
-                                <button type="submit" class="btn btn-guce-accent">Calculer orientation</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card card-panel">
-                        <div class="card-header">Planifier inspection</div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/inspection-schedule}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">UUID déclaration</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="i-declarationId-sched" required/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Canal</label>
-                                        <select class="form-select" name="channel" id="i-channel">
-                                            <option value="VERT">VERT</option>
-                                            <option value="ORANGE">ORANGE</option>
-                                            <option value="ROUGE">ROUGE</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Date planifiée (ISO)</label>
-                                        <input class="form-control" name="scheduledAt" id="i-scheduledAt"/>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Notes</label>
-                                        <textarea class="form-control" name="notes" id="i-notes" rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary mt-3">Planifier</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <div class="tab-pane fade" id="pane-inspection" role="tabpanel"><div class="card card-panel mb-3"><div class="card-header">Orientation canal</div><div class="card-body"><form th:action="@{/submit/inspection-orient}" method="post"><label class="form-label">UUID déclaration</label><input class="form-control font-monospace" name="declarationId" id="i-declarationId-orient" required><button type="submit" class="btn btn-guce-accent mt-3">Calculer orientation</button></form></div></div></div>
+                <div class="tab-pane fade" id="pane-pcs" role="tabpanel"><div class="card card-panel mb-3"><div class="card-header">Mouvement conteneur</div><div class="card-body"><form th:action="@{/submit/pcs-movement}" method="post"><div class="row g-3"><div class="col-md-4"><label class="form-label">Conteneur</label><input class="form-control" name="containerNumber" id="pcs-containerNumber" required></div><div class="col-md-4"><label class="form-label">UUID déclaration</label><input class="form-control font-monospace" name="declarationId" id="pcs-declarationId"></div><div class="col-md-4"><label class="form-label">Type</label><select class="form-select" name="movementType"><option>ENTREE</option><option>SORTIE</option></select></div></div><button type="submit" class="btn btn-guce-primary mt-3">Enregistrer</button></form></div></div></div>
+                <div class="tab-pane fade" id="pane-reference" role="tabpanel"><div class="card card-panel"><div class="card-body"><a class="btn btn-guce-primary" href="/?loadRefs=true">Charger codes SH & bureaux</a><p class="text-muted small mt-2">Appelle le service référentiels (port 8086).</p></div></div></div>
+                <div class="tab-pane fade" id="pane-operator" role="tabpanel"><div class="card card-panel"><div class="card-header">Enregistrement opérateur</div><div class="card-body"><form th:action="@{/submit/operator}" method="post"><div class="mb-3"><label class="form-label">Raison sociale</label><input class="form-control" name="legalName" id="o-legalName" required></div><div class="mb-3"><label class="form-label">E-mail</label><input class="form-control" name="email" id="o-email" type="email" required></div><div class="mb-3"><label class="form-label">Rôle</label><input class="form-control" name="role" id="o-role" required></div><button type="submit" class="btn btn-guce-primary">Enregistrer</button></form></div></div></div>
+                <div class="tab-pane fade" id="pane-notification" role="tabpanel"><div class="card card-panel"><div class="card-header">Demande de notification</div><div class="card-body"><form th:action="@{/submit/notification}" method="post"><div class="row g-3"><div class="col-md-3"><label class="form-label">Canal</label><select class="form-select" name="channel"><option>EMAIL</option><option>SMS</option></select></div><div class="col-md-9"><label class="form-label">Cible</label><input class="form-control" name="target" id="n-target" required></div><div class="col-12"><label class="form-label">Message</label><textarea class="form-control" name="bodyText" rows="5" required></textarea></div></div><button type="submit" class="btn btn-guce-primary mt-3">Envoyer</button></form></div></div></div>
+                <div class="tab-pane fade" id="pane-audit" role="tabpanel"><div class="card card-panel"><div class="card-header">Événement d’audit</div><div class="card-body"><form th:action="@{/submit/audit}" method="post"><div class="row g-3"><div class="col-md-6"><label class="form-label">UUID déclaration</label><input class="form-control font-monospace" name="declarationId" id="au-declarationId" required></div><div class="col-md-3"><label class="form-label">Type événement</label><input class="form-control" name="eventType" id="au-eventType" required></div><div class="col-md-3"><label class="form-label">Acteur</label><input class="form-control" name="actor" id="au-actor" required></div><div class="col-12"><label class="form-label">Payload JSON</label><textarea class="form-control" name="payloadJson" rows="5" required></textarea></div></div><button type="submit" class="btn btn-guce-accent mt-3">Enregistrer audit</button></form></div></div></div>
 
-                <!-- PCS -->
-                <div class="tab-pane fade" id="pane-pcs" role="tabpanel">
-                    <div class="card card-panel mb-3">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Mouvement conteneur</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillPcs()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/pcs-movement}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Conteneur</label>
-                                        <input class="form-control" name="containerNumber" id="pcs-containerNumber" required/>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="form-label">UUID déclaration (optionnel)</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="pcs-declarationId"/>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label class="form-label">Type</label>
-                                        <select class="form-select" name="movementType" id="pcs-movementType">
-                                            <option value="ENTREE">ENTREE</option>
-                                            <option value="SORTIE">SORTIE</option>
-                                            <option value="TRANSBORDEMENT">TRANSBORDEMENT</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label class="form-label">Date (ISO)</label>
-                                        <input class="form-control" name="occurredAt" id="pcs-occurredAt"/>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary mt-3">Enregistrer</button>
-                            </form>
-                        </div>
-                    </div>
+                <!-- ========== NOUVEAU : GUIDE DE FORMATION STEP BY STEP ========== -->
+                <div class="tab-pane fade" id="pane-guide" role="tabpanel">
                     <div class="card card-panel">
-                        <div class="card-header">Notification mainlevée (port)</div>
+                        <div class="card-header"><i class="fas fa-graduation-cap"></i> Guide de formation — Bien démarrer sur GUCE CI</div>
                         <div class="card-body">
-                            <form th:action="@{/submit/pcs-mainlevee}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">UUID déclaration</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="pcs-declarationId-ml" required/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-3"><i class="fas fa-arrow-right text-orange me-2"></i> Étapes pas à pas</h5>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">1. Comprendre le contexte</div>
+                                        <p>GUCE CI est le Guichet Unique du Commerce Extérieur de Côte d’Ivoire. Il centralise les déclarations douanières (DAU), manifests, paiements, inspections, et échanges avec le port (PCS).</p>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">UUID mainlevée</label>
-                                        <input class="form-control font-monospace" name="mainleveeId" id="pcs-mainleveeId" required/>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">2. Soumettre une DAU</div>
+                                        <p>Remplissez l'onglet <strong>DAU</strong> avec un Correlation ID unique, le déclarant, le bureau de douane, et le payload JSON (ex: marchandises, valeur). Cliquez sur "Soumettre". Un UUID sera généré.</p>
+                                    </div>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">3. Gérer le manifeste</div>
+                                        <p>Dans l'onglet <strong>Manifeste</strong>, saisissez le numéro du manifeste, le navire, la date d'arrivée et les lignes de conteneurs (JSON).</p>
+                                    </div>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">4. Paiement des taxes</div>
+                                        <p>Utilisez l'onglet <strong>Paiement</strong> : calculez les taxes à partir de l'UUID de la DAU, puis confirmez le paiement via un canal (WAVE, MTN, Trésor).</p>
+                                    </div>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">5. Inspection et orientation canal</div>
+                                        <p>L'onglet <strong>Inspection</strong> permet de déterminer le canal (vert, orange, rouge) et de planifier une inspection physique si nécessaire.</p>
+                                    </div>
+                                    <div class="step-card p-3 bg-light rounded mb-3">
+                                        <div class="fw-bold">6. Suivi portuaire (PCS)</div>
+                                        <p>Enregistrez les mouvements de conteneurs (entrée/sortie) et notifiez la mainlevée via l'onglet <strong>PCS / Port</strong>.</p>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-guce-accent mt-3">Envoyer accusé</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Référentiels -->
-                <div class="tab-pane fade" id="pane-reference" role="tabpanel">
-                    <div class="card card-panel mb-3">
-                        <div class="card-body">
-                            <a class="btn btn-guce-primary" href="/?loadRefs=true">Charger codes SH &amp; bureaux</a>
-                            <p class="text-muted small mt-2 mb-0">Appelle le service référentiels (port 8086).</p>
-                        </div>
-                    </div>
-                    <div th:if="${refsError}" class="alert alert-warning" th:text="${refsError}"></div>
-                    <div class="row g-3" th:if="${shCodes}">
-                        <div class="col-md-6">
-                            <div class="card card-panel">
-                                <div class="card-header">Codes SH</div>
-                                <div class="card-body p-0">
-                                    <table class="table table-sm mb-0">
-                                        <thead><tr><th>Code</th><th>Description</th></tr></thead>
-                                        <tbody>
-                                        <tr th:each="row : ${shCodes}">
-                                            <td th:text="${row.code}">-</td>
-                                            <td th:text="${row.description}">-</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-md-6">
+                                    <h5 class="mb-3"><i class="fas fa-clipboard-list me-2"></i> Backlog fonctionnel (feuille de route)</h5>
+                                    <div class="backlog-item">
+                                        <i class="fas fa-check-circle text-green me-2"></i> <strong>✔️ Terminé :</strong> DAU, Manifeste, Autorisation préalable, Calcul taxes, Paiement, Orientation inspection, Mouvements PCS, Référentiels SH.
+                                    </div>
+                                    <div class="backlog-item">
+                                        <i class="fas fa-spinner fa-spin me-2"></i> <strong>En cours :</strong> Intégration avec le système TRESOR_PAY réel, notification SMS/Email.
+                                    </div>
+                                    <div class="backlog-item">
+                                        <i class="fas fa-clock me-2"></i> <strong>À venir :</strong> Dashboard analytique temps réel, API publique pour transitaires, module de réclamation, signature électronique, blockchain pour traçabilité.
+                                    </div>
+                                    <div class="backlog-item">
+                                        <i class="fas fa-microchip me-2"></i> <strong>Améliorations prévues :</strong> Mode hors ligne, application mobile, intelligence artificielle pour orientation des risques.
+                                    </div>
+                                    <div class="alert alert-info mt-3">
+                                        <i class="fas fa-lightbulb"></i> <strong>Conseil :</strong> Utilisez les boutons "Remplir exemple" pour pré-remplir les formulaires et comprendre la structure des données.
+                                    </div>
+                                    <h5 class="mt-4"><i class="fas fa-question-circle"></i> Ressources</h5>
+                                    <ul>
+                                        <li><a href="http://localhost:8080/swagger-ui.html" target="_blank">Documentation API (Swagger)</a></li>
+                                        <li><a href="#">Guide utilisateur PDF (à venir)</a></li>
+                                        <li><a href="#">Support : support@guce.ci</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card card-panel">
-                                <div class="card-header">Bureaux de douane</div>
-                                <div class="card-body p-0">
-                                    <table class="table table-sm mb-0">
-                                        <thead><tr><th>Code</th><th>Nom</th></tr></thead>
-                                        <tbody>
-                                        <tr th:each="row : ${customsOffices}">
-                                            <td th:text="${row.code}">-</td>
-                                            <td th:text="${row.name}">-</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <hr>
+                            <div class="text-center mt-3">
+                                <i class="fas fa-video me-2"></i> Des tutoriels vidéo seront bientôt disponibles.
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Opérateur -->
-                <div class="tab-pane fade" id="pane-operator" role="tabpanel">
-                    <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Enregistrement opérateur</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillOperator()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/operator}" method="post">
-                                <div class="mb-3">
-                                    <label class="form-label">Raison sociale</label>
-                                    <input class="form-control" name="legalName" id="o-legalName" required/>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">E-mail</label>
-                                    <input class="form-control" name="email" id="o-email" type="email" required/>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Rôle</label>
-                                    <input class="form-control" name="role" id="o-role" required/>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary">Enregistrer</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Notification -->
-                <div class="tab-pane fade" id="pane-notification" role="tabpanel">
-                    <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Demande de notification</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillNotification()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/notification}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Canal</label>
-                                        <select class="form-select" name="channel" id="n-channel">
-                                            <option value="EMAIL">EMAIL</option>
-                                            <option value="SMS">SMS</option>
-                                            <option value="IN_APP">IN_APP</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <label class="form-label">Cible</label>
-                                        <input class="form-control" name="target" id="n-target" required/>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Message</label>
-                                        <textarea class="form-control" name="bodyText" id="n-body" rows="5" required></textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-primary mt-3">Envoyer demande</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Audit -->
-                <div class="tab-pane fade" id="pane-audit" role="tabpanel">
-                    <div class="card card-panel">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Événement d’audit</span>
-                            <button type="button" class="btn btn-sm btn-outline-amber" onclick="fillAudit()">Remplir exemple</button>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/submit/audit}" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">UUID déclaration</label>
-                                        <input class="form-control font-monospace" name="declarationId" id="au-declarationId" required/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Type événement</label>
-                                        <input class="form-control" name="eventType" id="au-eventType" required/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Acteur</label>
-                                        <input class="form-control" name="actor" id="au-actor" required/>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Payload JSON</label>
-                                        <textarea class="form-control" name="payloadJson" id="au-payloadJson" rows="5" required></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Date (ISO, optionnel)</label>
-                                        <input class="form-control" name="occurredAt" id="au-occurredAt"/>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-guce-accent mt-3">Enregistrer audit</button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -494,7 +502,85 @@
     </div>
 </div>
 
+<footer class="footer-portal text-center mt-4">
+    <span>© 2025 GUCE CI — Plateforme de commerce extérieur nouvelle génération <i class="fas fa-bolt" style="color: #F25E2A;"></i> | Design Orange/Noir/Green PRO</span>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/portal.js}"></script>
+<script>
+    // Initialisation des tooltips Bootstrap
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
+    // Fonctions de remplissage automatique (existantes et améliorées)
+    function fillDeclaration() {
+        document.getElementById('d-correlationId').value = 'CORR-' + Date.now();
+        document.getElementById('d-declarantId').value = 'DEC-1001';
+        document.getElementById('d-customsOfficeCode').value = 'ABJ01';
+        document.getElementById('d-referenceNumber').value = 'REF-DAU-'+Math.floor(Math.random()*1000);
+        document.getElementById('d-payloadJson').value = JSON.stringify({ goods: 'Cacao', weight: 25000, value: 5000000 }, null, 2);
+    }
+    function fillManifest() {
+        document.getElementById('m-manifestNumber').value = 'MAN-'+Math.floor(Math.random()*9000);
+        document.getElementById('m-vesselName').value = 'MSC ORANGE';
+        document.getElementById('m-arrivalDate').value = new Date().toISOString().slice(0,19);
+        document.getElementById('m-linesJson').value = '[{"bl":"BL123","containers":2}]';
+    }
+    function fillAuthorization() {
+        document.getElementById('a-applicantId').value = 'OP-'+Math.floor(Math.random()*100);
+        document.getElementById('a-goodsDescription').value = 'Machines industrielles, lots 5';
+        document.getElementById('a-expiresAt').value = '2026-12-31T23:59:59Z';
+    }
+    function fillPayment() {
+        let hint = document.getElementById('hint-last-declaration-id');
+        let uuid = hint ? hint.innerText : 'UUID-DEMO-1234';
+        document.getElementById('p-declarationId-tax').value = uuid;
+        document.getElementById('p-declarationId-confirm').value = uuid;
+        document.getElementById('p-amount').value = '1250000';
+    }
+    function fillInspection() {
+        let hint = document.getElementById('hint-last-declaration-id');
+        document.getElementById('i-declarationId-orient').value = hint ? hint.innerText : 'DEC-ABCD-1234';
+        document.getElementById('i-declarationId-sched').value = hint ? hint.innerText : 'DEC-ABCD-1234';
+        if(document.getElementById('i-scheduledAt')) document.getElementById('i-scheduledAt').value = new Date(Date.now()+86400000).toISOString().slice(0,19);
+    }
+    function fillPcs() {
+        document.getElementById('pcs-containerNumber').value = 'MSKU1234567';
+        let hint = document.getElementById('hint-last-declaration-id');
+        if(hint) document.getElementById('pcs-declarationId').value = hint.innerText;
+        if(document.getElementById('pcs-occurredAt')) document.getElementById('pcs-occurredAt').value = new Date().toISOString().slice(0,19);
+    }
+    function fillOperator() {
+        document.getElementById('o-legalName').value = 'SUD IMPORT EXPORT SARL';
+        document.getElementById('o-email').value = 'contact@suimport.ci';
+        document.getElementById('o-role').value = 'COMMISSIONNAIRE AGRÉÉ';
+    }
+    function fillNotification() {
+        document.getElementById('n-target').value = 'operateur@guce.ci';
+        document.getElementById('n-body').value = 'Votre déclaration a été approuvée.';
+    }
+    function fillAudit() {
+        let hint = document.getElementById('hint-last-declaration-id');
+        if(hint) document.getElementById('au-declarationId').value = hint.innerText;
+        document.getElementById('au-eventType').value = 'VALIDATION_DAU';
+        document.getElementById('au-actor').value = 'SYSTEM';
+        if(document.getElementById('au-occurredAt')) document.getElementById('au-occurredAt').value = new Date().toISOString().slice(0,19);
+    }
+    function resetProForm() {
+        document.getElementById('pro-fullname').value = '';
+        document.getElementById('pro-nif').value = '';
+        document.getElementById('pro-naf').value = '';
+        document.getElementById('pro-address').value = '';
+        document.getElementById('pro-capital').value = '';
+        document.getElementById('pro-agrement').value = '';
+        document.getElementById('pro-volume').value = '';
+        document.getElementById('pro-iso').value = '';
+    }
+</script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-com\guce\inspection\domain\InspectionChannel.class
 com\guce\inspection\api\dto\OrientRequest.class
 com\guce\inspection\api\InspectionController.class
 com\guce\inspection\api\dto\InspectionRequest.class
 com\guce\inspection\api\dto\InspectionResponse.class
-com\guce\inspection\domain\InspectionCaseRepository.class
 com\guce\inspection\domain\InspectionCase.class
-com\guce\inspection\InspectionServiceApplication.class
 com\guce\inspection\api\dto\ChannelOrientationResponse.class
+com\guce\inspection\domain\InspectionChannel.class
+com\guce\inspection\domain\InspectionCaseRepository.class
+com\guce\inspection\InspectionServiceApplication.class
 com\guce\inspection\config\OpenApiConfig.class

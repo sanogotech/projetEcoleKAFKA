@@ -1,127 +1,280 @@
-/* GUCE CI — palette 4 couleurs (clair, pro) */
+/* ========== GUCE CI PRO — PALETTE FORTE (Blanc, Orange, Noir, Vert) ========== */
 :root {
-  --guce-navy: #1a365d;
-  --guce-teal: #0d9488;
-  --guce-amber: #d97706;
-  --guce-surface: #f1f5f9;
-  --guce-white: #ffffff;
-  --guce-border: #e2e8f0;
-  --guce-text: #1e293b;
-  --guce-muted: #64748b;
+    --orange-power: #F25E2A;
+    --orange-deep: #E04E1A;
+    --black-absolute: #0A0C10;
+    --black-soft: #1A1C23;
+    --white-pure: #FFFFFF;
+    --white-off: #F8F9FC;
+    --green-flash: #2ECB6B;
+    --green-soft: #10B981;
+    --gray-border: #EFF2F8;
+    --gray-muted: #5B677B;
+    --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-hover: 0 25px 40px -14px rgba(242, 94, 42, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  background: var(--guce-surface);
-  color: var(--guce-text);
-  min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--white-off);
+    color: var(--black-soft);
+    overflow-x: hidden;
 }
 
+/* ---------- NAVBAR NOIR / ORANGE ---------- */
 .navbar-portal {
-  background: linear-gradient(135deg, var(--guce-navy) 0%, #234876 100%);
-  box-shadow: 0 2px 12px rgba(26, 54, 93, 0.15);
+    background: var(--black-absolute) !important;
+    border-bottom: 3px solid var(--orange-power);
+    padding: 0.9rem 1.5rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-.navbar-portal .navbar-brand {
-  font-weight: 600;
-  letter-spacing: 0.02em;
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFB08C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+}
+
+.navbar-brand i {
+    background: none;
+    -webkit-background-clip: unset;
+    color: var(--orange-power);
+    margin-right: 6px;
 }
 
 .badge-demo {
-  background: var(--guce-teal) !important;
-  font-weight: 500;
+    background: var(--orange-power);
+    color: white;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    vertical-align: middle;
 }
 
+/* ---------- SIDEBAR (PILLS ORANGE) ---------- */
 .sidebar-pills .nav-link {
-  color: var(--guce-text);
-  border-radius: 0.5rem;
-  margin-bottom: 0.25rem;
-  padding: 0.55rem 0.85rem;
-  font-size: 0.92rem;
+    color: var(--black-soft);
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.7rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.sidebar-pills .nav-link i {
+    width: 1.8rem;
+    color: var(--orange-power);
+    font-size: 1.1rem;
 }
 
 .sidebar-pills .nav-link:hover {
-  background: rgba(13, 148, 136, 0.08);
-  color: var(--guce-teal);
+    background: rgba(242, 94, 42, 0.1);
+    color: var(--orange-deep);
+    transform: translateX(4px);
 }
 
 .sidebar-pills .nav-link.active {
-  background: var(--guce-navy);
-  color: var(--guce-white);
+    background: var(--orange-power);
+    color: white;
+    box-shadow: 0 6px 12px rgba(242, 94, 42, 0.25);
 }
 
+.sidebar-pills .nav-link.active i {
+    color: white;
+}
+
+/* ---------- CARTES (BLANC / CONTRASTES) ---------- */
 .card-panel {
-  border: 1px solid var(--guce-border);
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(30, 41, 59, 0.06);
-  background: var(--guce-white);
+    background: var(--white-pure);
+    border: 1px solid var(--gray-border);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.card-panel:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
 .card-panel .card-header {
-  background: linear-gradient(90deg, rgba(26, 54, 93, 0.06), transparent);
-  border-bottom: 1px solid var(--guce-border);
-  font-weight: 600;
-  color: var(--guce-navy);
+    background: rgba(242, 94, 42, 0.02);
+    border-bottom: 2px solid var(--orange-power);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    color: var(--black-absolute);
 }
 
-.btn-guce-primary {
-  background-color: var(--guce-navy);
-  border-color: var(--guce-navy);
-  color: #fff;
+.card-panel .card-header i {
+    color: var(--orange-power);
+    margin-right: 0.6rem;
 }
 
-.btn-guce-primary:hover {
-  background-color: #152a45;
-  border-color: #152a45;
-  color: #fff;
-}
-
-.btn-guce-accent {
-  background-color: var(--guce-teal);
-  border-color: var(--guce-teal);
-  color: #fff;
-}
-
-.btn-guce-accent:hover {
-  background-color: #0b7a71;
-  border-color: #0b7a71;
-  color: #fff;
-}
-
-.btn-outline-amber {
-  color: var(--guce-amber);
-  border-color: var(--guce-amber);
-}
-
-.btn-outline-amber:hover {
-  background-color: var(--guce-amber);
-  color: #fff;
-}
-
+/* ---------- KPI CARDS ---------- */
 .kpi-card {
-  border-left: 4px solid var(--guce-teal);
-}
-
-.kpi-card.amber {
-  border-left-color: var(--guce-amber);
+    background: white;
+    border-radius: 1.25rem;
+    border-left: 5px solid var(--orange-power);
+    transition: all 0.2s;
 }
 
 .kpi-card.navy {
-  border-left-color: var(--guce-navy);
+    border-left-color: var(--black-absolute);
+}
+
+.kpi-card.amber {
+    border-left-color: var(--green-flash);
+}
+
+.kpi-card .kpi-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--black-absolute);
+}
+
+/* ---------- BOUTONS PUISSANTS ---------- */
+.btn-orange {
+    background: var(--orange-power);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.6rem 1.6rem;
+    border-radius: 2rem;
+    transition: all 0.2s;
+    box-shadow: 0 3px 8px rgba(242, 94, 42, 0.3);
+}
+
+.btn-orange:hover {
+    background: var(--orange-deep);
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(242, 94, 42, 0.4);
+    color: white;
+}
+
+.btn-outline-black {
+    border: 2px solid var(--black-soft);
+    background: transparent;
+    color: var(--black-soft);
+    font-weight: 600;
+    border-radius: 2rem;
+    transition: 0.2s;
+}
+
+.btn-outline-black:hover {
+    background: var(--black-soft);
+    color: white;
+}
+
+.btn-green {
+    background: var(--green-flash);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 2rem;
+    padding: 0.6rem 1.4rem;
+    transition: 0.2s;
+}
+
+.btn-green:hover {
+    background: #22a85a;
+    transform: translateY(-2px);
+}
+
+/* ---------- FORMULAIRES MODERNES ---------- */
+.form-control, .form-select {
+    border: 1.5px solid #E9EDF2;
+    border-radius: 1rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    background: white;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--orange-power);
+    box-shadow: 0 0 0 4px rgba(242, 94, 42, 0.15);
+    outline: none;
 }
 
 .form-label {
-  font-weight: 500;
-  color: var(--guce-muted);
-  font-size: 0.875rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--black-soft);
+    margin-bottom: 0.4rem;
 }
 
-textarea.form-control {
-  font-family: ui-monospace, "Cascadia Code", monospace;
-  font-size: 0.85rem;
+/* ---------- SECTION PLUS PRO : DOUBLE CHAMPS (8 champs) ---------- */
+.pro-double-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.3rem;
 }
 
+@media (max-width: 768px) {
+    .pro-double-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pro-badge {
+    background: linear-gradient(135deg, var(--orange-power), #c2410c);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 0.8rem;
+}
+
+.green-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--green-flash);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 0 2px rgba(46, 203, 107, 0.3);
+}
+
+/* ---------- FOOTER NOIR ---------- */
 .footer-portal {
-  font-size: 0.8rem;
-  color: var(--guce-muted);
+    background: var(--black-absolute);
+    color: #ADB5BD;
+    border-top: 1px solid #2A2E38;
+    font-size: 0.75rem;
+}
+
+.footer-portal a {
+    color: var(--orange-power);
+    text-decoration: none;
+}
+
+/* ---------- UTILITAIRES ---------- */
+.text-green {
+    color: var(--green-flash) !important;
+}
+
+.bg-soft-orange {
+    background: rgba(242, 94, 42, 0.05);
+}
+
+hr {
+    opacity: 0.3;
+    background: var(--gray-border);
 }
